@@ -1,0 +1,53 @@
+/**FILENAME: OrderWriter
+ * AUTHOR: Noah Adkin 
+ * COURSE: CPT 187
+ * PURPOSE: Point of sale, Sod
+ * CREATEDATE: December 4, 2019 **/
+
+package edu.cpt187.adkin.participation6;
+
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+public class OrderWriter 
+{
+	private final int NOT_FOUND = -1;
+	private final int RESET_VALUE = 0;
+
+	private String masterFileName = "master.txt";
+	private int recordCount = 0;
+	
+	public OrderWriter(String borrowedFileName)
+	{
+		
+	}
+	public void setWriteOrder(int borrowedItemID, String borrowedItemName, double borrowedItemPrice, int borrowedQuantity, double borrowedOrderCost)
+	{
+		//recordCount = RESET_VALUE;
+		try 
+		{
+			PrintWriter filePW = new PrintWriter(new FileWriter(masterFileName, true));
+			filePW.printf("%3d\t%20s\t%8.2f\t%3d\t%8.2f%n", borrowedItemID, borrowedItemName, borrowedItemPrice, borrowedQuantity, borrowedOrderCost);
+			filePW.close();
+			recordCount++;
+		}
+		catch (IOException ex)
+		{
+			//flag
+			recordCount = NOT_FOUND;
+			
+		}
+	}
+	public String getFileName()
+	{
+		return masterFileName;
+	}
+	public int getRecordCount()
+	{
+		return recordCount;
+	}
+	
+
+}
